@@ -1,0 +1,27 @@
+{
+    "name": "friendsofvictoire/search-widget",
+    "type": "symfony-bundle",
+    "description": "Victoire Search widget",
+    "keywords": ["victoire", "Search", "widget"],
+    "homepage": "http://victoire.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leny Bernard",
+            "email": "leny@appventus.com",
+            "homepage": "http://github.com/lenybernard"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle" : "~2.3",
+        "victoire/victoire": "~1.2@dev",
+        "jms/serializer-bundle": "^1.0",
+        "friendsofsymfony/elastica-bundle": "^3.1"
+    },
+    "autoload": {
+        "psr-0": { "Victoire\\Widget\\SearchBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Victoire/Widget/SearchBundle"
+}

@@ -1,0 +1,24 @@
+{% extends 'VictoireCoreBundle:Widget:new.html.twig' %}
+
+{% block form_static %}
+    <div id="picker-{{ form.mode.vars.data }}" class="vic-tab-pane {% if form.mode.vars.data == widget.mode %}vic-active{% endif %}">
+        {{ form_start(form) }}
+
+        <div class="vic-row">
+            <div class="vic-col-xs-12 vic-col-md-3">
+                <div class="vic-col-xs-12">
+                    {{ form_row(form.emitter) }}
+                </div>
+                <div class="vic-col-xs-12">
+                    {{ form_row(form.receiver) }}
+                </div>
+            </div>
+            <div class="vic-col-xs-12 vic-col-md-3">
+                {{ form_row(form.resultsPage) }}
+            </div>
+        </div>
+
+        {{form_rest(form)}}
+        {{ form_end(form) }}
+    </div>
+{% endblock form_static %}

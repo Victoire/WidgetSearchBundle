@@ -1,0 +1,12 @@
+{
+    "require_all":
+    {
+        "stylesheets":
+        {
+            "head":
+            [
+                "@VictoireWidgetSearchBundle/Resources/style/search.scss"
+            ]
+         }
+    }
+}

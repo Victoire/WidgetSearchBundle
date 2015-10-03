@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2013-11-27T18:15:06Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="1" resname="widget.search.new.action.label">
+        <source>widget.search.new.action.label</source>
+        <target state="new">Search</target>
+      </trans-unit>
+      <trans-unit id="2" resname="modal.form.widget.type.search.label">
+        <source>modal.form.widget.type.search.label</source>
+        <target state="new">Search</target>
+      </trans-unit>
+      <trans-unit id="3" resname="victoire.widget.search.show.input.placeholder">
+        <source>victoire.widget.search.show.input.placeholder</source>
+        <target>Search...</target>
+      </trans-unit>
+      <trans-unit id="4" resname="victoire.widget_search.form.emitter.label">
+        <source>victoire.widget_search.form.emitter.label</source>
+        <target>Emitter (Search input)</target>
+      </trans-unit>
+      <trans-unit id="5" resname="victoire.widget_search.form.receiver.label">
+        <source>victoire.widget_search.form.receiver.label</source>
+        <target>Receiver (Results list)</target>
+      </trans-unit>
+      <trans-unit id="6" resname="victoire.widget_search.form.resultsPage.label">
+        <source>victoire.widget_search.form.resultsPage.label</source>
+        <target>Choose the page where is the receiver (results page)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

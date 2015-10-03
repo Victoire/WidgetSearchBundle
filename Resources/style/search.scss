@@ -1,0 +1,26 @@
+.vic-widget-search {
+    ul {
+        li.search--item {
+            &.search--business {
+                background-color: rgb(255, 255, 250);
+            }
+            border: 1px solid #cccccc;
+            padding: 15px;
+            margin: 5px 0;
+            -moz-box-shadow: 1px 1px 3px 3px #eeeeee;
+            -webkit-box-shadow: 1px 1px 3px 3px #eeeeee;
+            -o-box-shadow: 1px 1px 3px 3px #eeeeee;
+            box-shadow: 1px 1px 3px 3px #eeeeee;
+            filter:progid:DXImageTransform.Microsoft.Shadow(color=#eeeeee, Direction=134, Strength=3);
+            .search--highlight {
+                em {
+                    font-weight: bold;
+                }
+            }
+            img.picture-preview {
+                max-height: 80px;
+                max-width: 80px;
+            }
+        }
+    }
+}

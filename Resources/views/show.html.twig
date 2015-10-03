@@ -1,0 +1,12 @@
+{% extends 'VictoireCoreBundle:Widget:show.html.twig' %}
+
+{% trans_default_domain "victoire" %}
+
+{% block content %}
+    {%- if emitter == true -%}
+        {%- include 'VictoireWidgetSearchBundle:Search:_emitter.html.twig' -%}
+    {%- endif -%}
+    {%- if receiver == true -%}
+        {%- include 'VictoireWidgetSearchBundle:Search:_receiver.html.twig' -%}
+    {%- endif -%}
+{% endblock content %}

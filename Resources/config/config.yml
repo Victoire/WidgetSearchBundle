@@ -1,0 +1,11 @@
+victoire_core:
+    widgets:
+        Search:
+            class: "Victoire\\Widget\\SearchBundle\\Entity\\WidgetSearch"
+            name: Search
+            
+jms_translation:
+    configs:
+        victoire_search_bundle:
+            dirs: ["@VictoireSearchBundle"]
+            output_dir: "@VictoireSearchBundle/Resources/translations"

@@ -1,0 +1,44 @@
+{%- for scope, scopeValue in search -%}
+    {%- for className, results in scopeValue -%}
+        {%- if results|length > 0 -%}
+            <ul class="list-unstyled">
+                {%- for data in results -%}
+
+                    <li class="search--item search--{{ scope }}">
+                        <div class="row">
+                            {%- if data.page.seo and data.page.seo.ogImage -%}
+                                <div class="col-sm-1">
+                                    <img src="{{ data.page.seo.ogImage }}" class="picture-preview"/>
+                                </div>
+                            {%- endif -%}
+
+                            {%- if data.page.seo and data.page.seo.ogImage -%}
+                                <div class="col-sm-11">
+                            {% else %}
+                                <div class="col-xs-12">
+                            {% endif %}
+                                <a href="{{ path('victoire_core_page_show', {'url' : data.page.url}) }}">
+                                    {{ data.page.name }}
+                                </a>
+                                <p class="search--highlight">
+                                    {% set hasDescription = false %}
+                                    {%- for _highlight in data.highlights -%}
+                                        {# Do not display highlight if it's strictly the search phrase #}
+                                        {% if _highlight|first|striptags|lower != app.request.get('q')|lower %}
+                                            {{ _highlight|first|striptags('<em>')|raw }}...
+                                            {% set hasDescription = true %}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                    {# If nothing went wrote, we display the metaDescription #}
+                                    {% if not hasDescription and data.page.seo -%}
+                                        {{ data.page.seo.metaDescription }}
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                {%- endfor -%}
+            </ul>
+        {%- endif -%}
+    {%- endfor -%}
+{%- endfor -%}
