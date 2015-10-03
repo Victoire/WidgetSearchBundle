@@ -39,7 +39,7 @@ fos_elastica:
             types:
                 Jedi:
                     serializer:
-                        groups: [elastica]
+                        groups: [search]
                     mappings:
                         title: ~
                         city: ~
