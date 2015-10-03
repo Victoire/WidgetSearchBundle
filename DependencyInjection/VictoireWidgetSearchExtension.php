@@ -58,7 +58,7 @@ class VictoireWidgetSearchExtension extends Extension implements PrependExtensio
                                         'types' => [
                                             $_widgetConfig['name'] => [
                                                 'serializer'  => [
-                                                    'groups' => ['elastica']
+                                                    'groups' => ['search']
                                                 ],
                                                 'mappings'    => [],
                                                 'persistence' => [
