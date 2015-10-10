@@ -1,30 +1,15 @@
-#Victoire CMS Search Bundle
+#Victoire DCMS Search Bundle
+============
 
-Need to add a search in a victoire cms website ?
+##What is the purpose of this bundle
 
-First you need to have a valid Symfony2 Victoire edition.
-Then you just have to run the following composer command :
+This bundles gives you access to the *Search Widget* which is a search bar that can find any text.
 
-    php composer.phar require friendsofvictoire/search-widget
+It works with elastica and searches automatically in every searchable widget (thanks to the widget's embedded configuration).
+You place an emitter spot (i.e : the search bar) and define the result page where you'll place a receiver spot.
 
-Do not forget to add the bundle in your AppKernel !
+##Specific search within BusinessEntities
 
-```php
-    class AppKernel extends Kernel
-    {
-        public function registerBundles()
-        {
-            $bundles = array(
-                ...
-                new Victoire\Widget\SearchBundle\VictoireWidgetSearchBundle(),
-            );
-
-            return $bundles;
-        }
-    }
-```
-
-The search widget works with elastica and search automatically in every searchable widget (thanks to the widget's embedded configuration).
 If you want to search your BusinessEntities, you'll have to define your own configuration for your BusinessEntities:
 
 ```yml
@@ -52,4 +37,34 @@ fos_elastica:
                         provider: ~
                         listener: ~
                         finder: ~
+```
+
+
+##Set Up Victoire
+
+If you haven't already, you can follow the steps to set up Victoire *[here](https://github.com/Victoire/victoire/blob/master/setup.md)*
+
+##Install the bundle
+
+Run the following composer command :
+
+    php composer.phar require friendsofvictoire/search-widget
+
+###Reminder
+
+Do not forget to add the bundle in your AppKernel !
+
+```php
+    class AppKernel extends Kernel
+    {
+        public function registerBundles()
+        {
+            $bundles = array(
+                ...
+                new Victoire\Widget\SearchBundle\VictoireWidgetSearchBundle(),
+            );
+
+            return $bundles;
+        }
+    }
 ```

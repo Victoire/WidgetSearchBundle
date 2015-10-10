@@ -20,15 +20,19 @@
       </trans-unit>
       <trans-unit id="4" resname="victoire.widget_search.form.emitter.label">
         <source>victoire.widget_search.form.emitter.label</source>
-        <target>Émetteur (Champ de recherche)</target>
+        <target>Mode émetteur (Barre de recherche)</target>
       </trans-unit>
       <trans-unit id="5" resname="victoire.widget_search.form.receiver.label">
         <source>victoire.widget_search.form.receiver.label</source>
-        <target>Récepteur (Liste de résultats)</target>
+        <target>Mode récepteur (Liste de résultats)</target>
       </trans-unit>
       <trans-unit id="6" resname="victoire.widget_search.form.resultsPage.label">
         <source>victoire.widget_search.form.resultsPage.label</source>
-        <target>Choisissez la page ou est situé le récepteur (page de résultats)</target>
+        <target>Choisir la page de résultats (où sera situé un widget en mode récepteur)</target>
+      </trans-unit>
+      <trans-unit id="7" resname="victoire.widget_search.form.label">
+        <source>victoire.widget_search.form.label</source>
+        <target>Sélection du mode</target>
       </trans-unit>
     </body>
   </file>
