@@ -1,14 +1,14 @@
 {
     "name": "friendsofvictoire/search-widget",
     "type": "symfony-bundle",
-    "description": "Victoire Search widget",
-    "keywords": ["victoire", "Search", "widget"],
+    "description": "Victoire DCMS Search widget",
+    "keywords": ["DCMS", "Victoire", "widget", "FriendsofVictoire", "Dynamic", "CMS", "Search"],
     "homepage": "http://victoire.io",
     "license": "MIT",
     "authors": [
         {
             "name": "Leny Bernard",
-            "email": "leny@appventus.com",
+            "email": "leny@victoire.io",
             "homepage": "http://github.com/lenybernard"
         }
     ],
