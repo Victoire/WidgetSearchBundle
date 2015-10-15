@@ -4,63 +4,60 @@ namespace Victoire\Widget\SearchBundle\Form;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\Widget\SearchBundle\Entity\WidgetSearch;
 
-
 /**
- * WidgetSearch form type
+ * WidgetSearch form type.
  */
 class WidgetSearchType extends WidgetType
 {
-
     /**
-     * define form fields
+     * define form fields.
+     *
      * @param FormBuilderInterface $builder
+     *
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         parent::buildForm($builder, $options);
         //add the mode to the form
-        $builder->add('emitter', null, array(
+        $builder->add('emitter', null, [
                 'label' => 'victoire.widget_search.form.emitter.label',
-                'attr' => [
-                    'data-refreshOnChange' => "true",
+                'attr'  => [
+                    'data-refreshOnChange' => 'true',
                 ],
-        ))->add('receiver', null, array(
+        ])->add('receiver', null, [
                 'label' => 'victoire.widget_search.form.receiver.label',
-                'attr' => [
-                    'data-refreshOnChange' => "true",
+                'attr'  => [
+                    'data-refreshOnChange' => 'true',
                 ],
-        ))->add('resultsPage', null, array(
-                'label' => 'victoire.widget_search.form.resultsPage.label',
-                'empty_value' => true
-            ));
-
+        ])->add('resultsPage', null, [
+                'label'       => 'victoire.widget_search.form.resultsPage.label',
+                'empty_value' => true,
+            ]);
     }
 
     /**
-     * bind form to WidgetSearch entity
+     * bind form to WidgetSearch entity.
+     *
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         parent::setDefaultOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\SearchBundle\Entity\WidgetSearch',
             'widget'             => 'Search',
-            'translation_domain' => 'victoire'
-        ));
+            'translation_domain' => 'victoire',
+        ]);
     }
 
     /**
-     * get form name
+     * get form name.
      *
      * @return string The form name
      */

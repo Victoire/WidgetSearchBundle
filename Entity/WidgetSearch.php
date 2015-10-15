@@ -1,14 +1,13 @@
 <?php
+
 namespace Victoire\Widget\SearchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
-use Victoire\Bundle\CoreBundle\Entity\View;
 use Victoire\Bundle\PageBundle\Entity\Page;
 use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
- * WidgetSearch
+ * WidgetSearch.
  *
  * @ORM\Table("vic_widget_search")
  * @ORM\Entity
@@ -34,15 +33,14 @@ class WidgetSearch extends Widget
      *
      * @ORM\ManyToOne(targetEntity="\Victoire\Bundle\PageBundle\Entity\Page", cascade={"persist"})
      * @ORM\JoinColumn(name="results_page_id", referencedColumnName="id", onDelete="SET NULL")
-     *
      */
     protected $resultsPage;
 
     /**
      * To String function
-     * Used in render choices type (Especially in VictoireWidgetRenderBundle)
+     * Used in render choices type (Especially in VictoireWidgetRenderBundle).
      *
-     * @return String
+     * @return string
      */
     public function __toString()
     {
@@ -82,7 +80,8 @@ class WidgetSearch extends Widget
     }
 
     /**
-     * Set resultsPage
+     * Set resultsPage.
+     *
      * @param Page $resultsPage
      *
      * @return WidgetSearch
@@ -95,7 +94,7 @@ class WidgetSearch extends Widget
     }
 
     /**
-     * Get resultsPage
+     * Get resultsPage.
      *
      * @return string
      */
