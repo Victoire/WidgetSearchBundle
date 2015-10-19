@@ -61,6 +61,8 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
      */
     public function getWidgetStaticContent(Widget $widget)
     {
+        // Boolan to check if we have result
+        $hasResult = false;
         $parameters = parent::getWidgetStaticContent($widget);
         $parameters['query'] = $this->request->get('q');
         if (true === $parameters['emitter']) {
@@ -95,6 +97,9 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                             ],
                         ]);
                         foreach ($_repo->findHybrid($query) as $_result) {
+                            // We have a result
+                            $hasResult = true;
+
                             $_entity = $_result->getTransformed();
                             /** @var Result $_result */
                             $_result = $_result->getResult();
@@ -147,6 +152,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                 }
             }
         }
+        $parameters['hasResult'] = $hasResult;
 
         return $parameters;
     }

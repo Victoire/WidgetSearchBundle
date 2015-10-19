@@ -42,3 +42,6 @@
         {%- endif -%}
     {%- endfor -%}
 {%- endfor -%}
+{%- if not hasResult -%}
+    {{ cms_slot_widgets('victoire_widget_search_' ~ widget.childrenSlot) }}
+{%- endif -%}
