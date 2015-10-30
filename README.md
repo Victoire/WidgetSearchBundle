@@ -1,4 +1,4 @@
-#Victoire DCMS Search Bundle
+Victoire DCMS Search Bundle
 ============
 
 ##What is the purpose of this bundle

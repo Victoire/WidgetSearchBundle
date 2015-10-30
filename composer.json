@@ -2,7 +2,7 @@
     "name": "friendsofvictoire/search-widget",
     "type": "symfony-bundle",
     "description": "Victoire DCMS Search widget",
-    "keywords": ["DCMS", "Victoire", "widget", "FriendsofVictoire", "Dynamic", "CMS", "Search"],
+    "keywords": ["DCMS", "Victoire", "widget", "FriendsofVictoire", "FoV", "Dynamic", "CMS", "Search"],
     "homepage": "http://victoire.io",
     "license": "MIT",
     "authors": [
@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle" : "~2.3",
-        "victoire/victoire": "~1.2@dev",
+        "victoire/victoire": "~1.3.0",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/elastica-bundle": "^3.1"
     },
