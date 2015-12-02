@@ -8,13 +8,12 @@ use Elastica\Query\QueryString;
 use Elastica\Result;
 use FOS\ElasticaBundle\Configuration\ConfigManager;
 use FOS\ElasticaBundle\Doctrine\RepositoryManager;
-use FOS\ElasticaBundle\Elastica\Index;
 use FOS\ElasticaBundle\Repository;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Victoire\Bundle\CoreBundle\Helper\ViewCacheHelper;
 use Victoire\Bundle\PageBundle\Entity\BasePage;
 use Victoire\Bundle\PageBundle\Helper\PageHelper;
 use Victoire\Bundle\TemplateBundle\Entity\Template;
+use Victoire\Bundle\ViewReferenceBundle\Cache\Xml\ViewReferenceXmlCacheRepository;
 use Victoire\Bundle\WidgetBundle\Model\Widget;
 use Victoire\Bundle\WidgetBundle\Resolver\BaseWidgetContentResolver;
 
@@ -25,7 +24,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
     private $businessIndexConfig;
     private $widgetsIndexConfig;
     protected $entityManager;
-    private $viewCacheHelper;
+    private $viewReferenceCacheRepository;
     private $pageHelper;
 
     /**
@@ -35,12 +34,11 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
      * @param RepositoryManager $elasticORM
      * @param ConfigManager     $configManager
      * @param EntityManager     $entityManager
-     * @param ViewCacheHelper   $viewCacheHelper
-     * @param PageHelper        $pageHelper
-     *
+     * @param ViewReferenceXmlCacheRepository $viewReferenceCacheRepository
+     * @param PageHelper $pageHelper
      * @internal param Index $appIndex
      */
-    public function __construct(RequestStack $requestStack, RepositoryManager $elasticORM, ConfigManager $configManager, EntityManager $entityManager, ViewCacheHelper $viewCacheHelper, PageHelper $pageHelper)
+    public function __construct(RequestStack $requestStack, RepositoryManager $elasticORM, ConfigManager $configManager, EntityManager $entityManager, ViewReferenceXmlCacheRepository $viewReferenceCacheRepository, PageHelper $pageHelper)
     {
         $this->request = $requestStack->getCurrentRequest();
         $this->elasticORM = $elasticORM;
@@ -48,7 +46,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
         $this->widgetsIndexConfig = $configManager->getIndexConfiguration('widgets');
         $this->pagesIndexConfig = $configManager->getIndexConfiguration('pages');
         $this->entityManager = $entityManager;
-        $this->viewCacheHelper = $viewCacheHelper;
+        $this->viewReferenceCacheRepository = $viewReferenceCacheRepository;
         $this->pageHelper = $pageHelper;
     }
 
@@ -127,11 +125,11 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                     }
                                 } else {
                                     //$_entity is a Business Entity
-                                    $businessPagesRefs = $this->viewCacheHelper->getAllReferenceByParameters(
-                                        [
+                                    $businessPagesRefs = $this->viewReferenceCacheRepository->getReferencesByParameters(
+                                        array(
                                             'entityId'        => $_entity->getId(),
-                                            'entityNamespace' => $_typeConfig->getModel(),
-                                        ]
+                                            'entityNamespace' => $_typeConfig->getModel()
+                                        )
                                     );
 
                                     foreach ($businessPagesRefs as $_businessPageRef) {

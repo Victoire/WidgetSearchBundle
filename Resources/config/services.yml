@@ -6,7 +6,7 @@ services:
             - @fos_elastica.manager.orm
             - @fos_elastica.config_manager
             - @doctrine.orm.entity_manager
-            - @victoire_core.view_cache_helper
+            - @victoire_view_reference.cache.repository
             - @victoire_page.page_helper
         tags:
             - { name: victoire_widget.widget_content_resolver, alias: Search }
