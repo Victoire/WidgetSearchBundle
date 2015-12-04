@@ -30,12 +30,13 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
     /**
      * $filterChain is not cast because it can be null.
      *
-     * @param RequestStack      $requestStack
-     * @param RepositoryManager $elasticORM
-     * @param ConfigManager     $configManager
-     * @param EntityManager     $entityManager
+     * @param RequestStack                    $requestStack
+     * @param RepositoryManager               $elasticORM
+     * @param ConfigManager                   $configManager
+     * @param EntityManager                   $entityManager
      * @param ViewReferenceXmlCacheRepository $viewReferenceCacheRepository
-     * @param PageHelper $pageHelper
+     * @param PageHelper                      $pageHelper
+     *
      * @internal param Index $appIndex
      */
     public function __construct(RequestStack $requestStack, RepositoryManager $elasticORM, ConfigManager $configManager, EntityManager $entityManager, ViewReferenceXmlCacheRepository $viewReferenceCacheRepository, PageHelper $pageHelper)
@@ -126,10 +127,10 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                 } else {
                                     //$_entity is a Business Entity
                                     $businessPagesRefs = $this->viewReferenceCacheRepository->getReferencesByParameters(
-                                        array(
+                                        [
                                             'entityId'        => $_entity->getId(),
-                                            'entityNamespace' => $_typeConfig->getModel()
-                                        )
+                                            'entityNamespace' => $_typeConfig->getModel(),
+                                        ]
                                     );
 
                                     foreach ($businessPagesRefs as $_businessPageRef) {
