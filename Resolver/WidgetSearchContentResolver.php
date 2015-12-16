@@ -133,7 +133,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                     );
 
                                     foreach ($businessPagesRefs as $_businessPageRef) {
-                                        $_businessPage = $this->pageHelper->findPageByReference($_businessPageRef);
+                                        $_businessPage = $this->pageHelper->findPageByReference($_businessPageRef, $_entity);
                                         if (!in_array($_businessPage->getId(), $alreadyAdded)) {
                                             $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()][] = [
                                                 'page'       => $_businessPage,
