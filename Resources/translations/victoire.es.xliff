@@ -14,10 +14,6 @@
         <source>modal.form.widget.type.search.label</source>
         <target>Búsqueda</target>
       </trans-unit>
-      <trans-unit id="3" resname="victoire.widget.search.show.input.placeholder">
-        <source>victoire.widget.search.show.input.placeholder</source>
-        <target>Buscar...</target>
-      </trans-unit>
       <trans-unit id="4" resname="victoire.widget_search.form.emitter.label">
         <source>victoire.widget_search.form.emitter.label</source>
         <target>Modo transmisor (Barra de búsqueda)</target>

@@ -1,38 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2013-11-27T18:15:06Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
-    <header>
-      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
-    </header>
+  <file date="2013-11-27T18:15:06Z" source-language="en" target-language="de" datatype="plaintext" original="not.available">
     <body>
       <trans-unit id="1" resname="widget.search.new.action.label">
         <source>widget.search.new.action.label</source>
-        <target state="new">Search</target>
+        <target state="new">Suche</target>
       </trans-unit>
       <trans-unit id="2" resname="modal.form.widget.type.search.label">
         <source>modal.form.widget.type.search.label</source>
-        <target state="new">Search</target>
+        <target state="new">Suche</target>
       </trans-unit>
       <trans-unit id="4" resname="victoire.widget_search.form.emitter.label">
         <source>victoire.widget_search.form.emitter.label</source>
-        <target>Search bar (Emitter mode)</target>
+        <target>Suchleiste (Emitter mode)</target>
       </trans-unit>
       <trans-unit id="5" resname="victoire.widget_search.form.receiver.label">
         <source>victoire.widget_search.form.receiver.label</source>
-        <target>Results' list (Receiver mode)</target>
+        <target>Liste der Ergebnisse (Mode-Empfänger)</target>
       </trans-unit>
       <trans-unit id="6" resname="victoire.widget_search.form.resultsPage.label">
         <source>victoire.widget_search.form.resultsPage.label</source>
-        <target>Set the results' page (where you will place a widget in receiver mode)</target>
+        <target>Stellen Sie die Ergebnisse 'Seite (wo Sie Legen Sie eine Widget-Empfänger in der Mode)</target>
       </trans-unit>
       <trans-unit id="7" resname="victoire.widget_search.form.label">
         <source>victoire.widget_search.form.label</source>
-        <target>Mode selection</target>
-      </trans-unit>
-      <trans-unit id="8" resname="widget.socialbuttons.link">
-        <source>widget.socialbuttons.link</source>
-        <target>Link</target>
+        <target>Auswahlmodus</target>
       </trans-unit>
     </body>
   </file>

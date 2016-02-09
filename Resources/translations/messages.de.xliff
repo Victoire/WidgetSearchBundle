@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2013-11-27T18:15:06Z" source-language="en" target-language="de" datatype="plaintext" original="not.available">
+    <body>
+      <trans-unit>
+        <source>victoire.widget.search.show.input.placeholder</source>
+        <target>Suche...</target>
+      </trans-unit>
+      <trans-unit>
+        <source>victoire.widget_search.receiver.noresults</source>
+        <target>Keine Ergebnisse</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
