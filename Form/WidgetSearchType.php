@@ -4,7 +4,7 @@ namespace Victoire\Widget\SearchBundle\Form;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\Widget\SearchBundle\Entity\WidgetSearch;
 
@@ -25,44 +25,32 @@ class WidgetSearchType extends WidgetType
         parent::buildForm($builder, $options);
         //add the mode to the form
         $builder->add('emitter', null, [
-                'label' => 'victoire.widget_search.form.emitter.label',
-                'attr'  => [
-                    'data-refreshOnChange' => 'true',
-                ],
+            'label' => 'victoire.widget_search.form.emitter.label',
+            'attr'  => [
+                'data-refreshOnChange' => 'true',
+            ],
         ])->add('receiver', null, [
-                'label' => 'victoire.widget_search.form.receiver.label',
-                'attr'  => [
-                    'data-refreshOnChange' => 'true',
-                ],
+            'label' => 'victoire.widget_search.form.receiver.label',
+            'attr'  => [
+                'data-refreshOnChange' => 'true',
+            ],
         ])->add('resultsPage', null, [
-                'label'       => 'victoire.widget_search.form.resultsPage.label',
-                'empty_value' => true,
-            ]);
+            'label'       => 'victoire.widget_search.form.resultsPage.label',
+            'empty_value' => true,
+        ]);
     }
 
     /**
-     * bind form to WidgetSearch entity.
-     *
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\SearchBundle\Entity\WidgetSearch',
             'widget'             => 'Search',
             'translation_domain' => 'victoire',
         ]);
-    }
-
-    /**
-     * get form name.
-     *
-     * @return string The form name
-     */
-    public function getName()
-    {
-        return 'victoire_widget_form_search';
     }
 }

@@ -19,4 +19,4 @@ services:
     victoire.widget.form.search:
         class: Victoire\Widget\SearchBundle\Form\WidgetSearchType
         tags:
-            - { name: form.type , alias: victoire_widget_form_search }
+            - { name: form.type }
