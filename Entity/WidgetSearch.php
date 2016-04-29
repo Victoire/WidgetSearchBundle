@@ -3,9 +3,9 @@
 namespace Victoire\Widget\SearchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\Bundle\WidgetBundle\Entity\WidgetSlotInterface;
 use Victoire\Bundle\PageBundle\Entity\Page;
 use Victoire\Bundle\WidgetBundle\Entity\Widget;
+use Victoire\Bundle\WidgetBundle\Entity\WidgetSlotInterface;
 
 /**
  * WidgetSearch.
