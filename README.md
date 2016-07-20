@@ -62,6 +62,7 @@ Do not forget to add the bundle in your AppKernel !
             $bundles = array(
                 ...
                 new Victoire\Widget\SearchBundle\VictoireWidgetSearchBundle(),
+                new FOS\ElasticaBundle\FOSElasticaBundle(),
             );
 
             return $bundles;
