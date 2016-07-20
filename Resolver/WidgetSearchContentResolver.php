@@ -66,7 +66,8 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
         $parameters['query'] = $this->request->get('q');
         if (true === $parameters['emitter']) {
             $parameters['ajax'] = $parameters['receiver'];
-        } elseif (true === $parameters['receiver']) {
+        }
+            if (true === $parameters['receiver']) {
             $parameters['search'] = [
                 'business'  => [],
                 'pages'     => [],
@@ -80,8 +81,9 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                         $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()] = [];
                         /** @var Repository $_repo */
                         $_repo = $this->elasticORM->getRepository($_typeConfig->getModel());
-                        if ('pages' == $_indexConfig->getName()) {
-                            $query = self::getI18NQuery($this->request->get('q'), $widget->getView()->getLocale());
+                        $locale = $widget->getWidgetMap()->getView()->getCurrentLocale();
+                        if ('pages' == $_indexConfig->getName() && $locale) {
+                            $query = self::getI18NQuery($this->request->get('q'), $locale);
                         } else {
                             $query = self::getBaseQuery($this->request->get('q'));
                         }
@@ -105,7 +107,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
 
                             if ($_result->getScore() > 0.4) {
                                 if ($_entity instanceof Widget) {
-                                    $view = $_entity->getView();
+                                    $view = $_entity->getWidgetMap()->getView();
                                     if (!in_array($view->getId(), $alreadyAdded) && !$view instanceof Template) {
                                         $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()][] = [
                                             'page'       => $view,
