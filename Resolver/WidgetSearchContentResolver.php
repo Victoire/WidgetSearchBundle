@@ -10,6 +10,8 @@ use FOS\ElasticaBundle\Configuration\ConfigManager;
 use FOS\ElasticaBundle\Doctrine\RepositoryManager;
 use FOS\ElasticaBundle\Repository;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Victoire\Bundle\PageBundle\Entity\BasePage;
 use Victoire\Bundle\PageBundle\Helper\PageHelper;
 use Victoire\Bundle\TemplateBundle\Entity\Template;
@@ -108,23 +110,26 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                             if ($_result->getScore() > 0.4) {
                                 if ($_entity instanceof Widget) {
                                     $view = $_entity->getWidgetMap()->getView();
-                                    if (!in_array($view->getId(), $alreadyAdded) && !$view instanceof Template) {
-                                        $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()][] = [
-                                            'page'       => $view,
-                                            'result'     => $_result,
-                                            'highlights' => $_result->getHighlights(),
-
-                                        ];
-                                        $alreadyAdded[] = $view->getId().$view->getName();
+                                    if ($this->isPageAccessible($view)) {
+                                        if (!in_array($view->getId(), $alreadyAdded) && !$view instanceof Template) {
+                                            $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()][] = [
+                                                'page'       => $view,
+                                                'result'     => $_result,
+                                                'highlights' => $_result->getHighlights(),
+                                            ];
+                                            $alreadyAdded[] = $view->getId().$view->getName();
+                                        }
                                     }
                                 } elseif ($_entity instanceof BasePage) {
-                                    if (!in_array($_entity->getId(), $alreadyAdded) && !$_entity instanceof Template) {
-                                        $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()][] = [
-                                            'page'       => $_entity,
-                                            'result'     => $_result,
-                                            'highlights' => $_result->getHighlights(),
-                                        ];
-                                        $alreadyAdded[] = $_entity->getId().$_entity->getName();
+                                    if ($this->isPageAccessible($_entity)) {
+                                        if (!in_array($_entity->getId(), $alreadyAdded) && !$_entity instanceof Template) {
+                                            $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()][] = [
+                                                'page'       => $_entity,
+                                                'result'     => $_result,
+                                                'highlights' => $_result->getHighlights(),
+                                            ];
+                                            $alreadyAdded[] = $_entity->getId().$_entity->getName();
+                                        }
                                     }
                                 } else {
                                     //$_entity is a Business Entity
@@ -136,14 +141,17 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                     );
 
                                     foreach ($businessPagesRefs as $_businessPageRef) {
+
                                         $_businessPage = $this->pageHelper->findPageByReference($_businessPageRef, $_entity);
-                                        if (!in_array($_businessPage->getId(), $alreadyAdded)) {
-                                            $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()][] = [
-                                                'page'       => $_businessPage,
-                                                'result'     => $_result,
-                                                'highlights' => $_result->getHighlights(),
-                                            ];
-                                            $alreadyAdded[] = $_businessPage->getId().$_businessPage->getName();
+                                        if ($this->isPageAccessible($_businessPage, $_entity)) {
+                                            if (!in_array($_businessPage->getId(), $alreadyAdded)) {
+                                                $parameters['search'][$_indexConfig->getName()][$_typeConfig->getName()][] = [
+                                                    'page'       => $_businessPage,
+                                                    'result'     => $_result,
+                                                    'highlights' => $_result->getHighlights(),
+                                                ];
+                                                $alreadyAdded[] = $_businessPage->getId().$_businessPage->getName();
+                                            }
                                         }
                                     }
                                 }
@@ -183,5 +191,23 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
     protected function getBaseQuery($term)
     {
         return new Query(new QueryString($term));
+    }
+
+    /**
+     * @param      $page
+     * @param null $entity
+     *
+     * @return bool
+     */
+    protected function isPageAccessible($page, $entity = null)
+    {
+        try {
+            $this->pageHelper->checkPageValidity($page, $entity);
+            return true;
+        } catch (AccessDeniedException $e) {
+            return false;
+        } catch (NotFoundHttpException $e) {
+            return false;
+        }
     }
 }
