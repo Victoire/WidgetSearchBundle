@@ -3,6 +3,7 @@ victoire_core:
         Search:
             class: "Victoire\\Widget\\SearchBundle\\Entity\\WidgetSearch"
             name: Search
+            cache: false
             
 jms_translation:
     configs:
