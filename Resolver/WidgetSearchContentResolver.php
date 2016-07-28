@@ -69,7 +69,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
         if (true === $parameters['emitter']) {
             $parameters['ajax'] = $parameters['receiver'];
         }
-            if (true === $parameters['receiver']) {
+        if (true === $parameters['receiver']) {
             $parameters['search'] = [
                 'business'  => [],
                 'pages'     => [],
@@ -84,10 +84,17 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                         /** @var Repository $_repo */
                         $_repo = $this->elasticORM->getRepository($_typeConfig->getModel());
                         $locale = $widget->getWidgetMap()->getView()->getCurrentLocale();
+
+                        //get fields for query
+                        $fields = [];
+                        foreach ($_typeConfig->getMapping()['properties'] as $name=>$property) {
+                            $fields[] = $name;
+                        }
+
                         if ('pages' == $_indexConfig->getName() && $locale) {
                             $query = self::getI18NQuery($this->request->get('q'), $locale);
                         } else {
-                            $query = self::getBaseQuery($this->request->get('q'));
+                            $query = self::getBaseQuery($this->request->get('q'), $fields);
                         }
 
                         $query->setHighlight([
@@ -141,7 +148,6 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                     );
 
                                     foreach ($businessPagesRefs as $_businessPageRef) {
-
                                         $_businessPage = $this->pageHelper->findPageByReference($_businessPageRef, $_entity);
                                         if ($this->isPageAccessible($_businessPage, $_entity)) {
                                             if (!in_array($_businessPage->getId(), $alreadyAdded)) {
@@ -185,12 +191,17 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
 
     /**
      * @param $term
+     * @param array $fields
      *
      * @return Query
      */
-    protected function getBaseQuery($term)
+    protected function getBaseQuery($term, $fields)
     {
-        return new Query(new QueryString($term));
+        $query = new \Elastica\Query\QueryString();
+        $query->setParam('query', $term);
+        $query->setParam('fields', $fields);
+
+        return new Query($query);
     }
 
     /**
@@ -203,6 +214,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
     {
         try {
             $this->pageHelper->checkPageValidity($page, $entity);
+
             return true;
         } catch (AccessDeniedException $e) {
             return false;
