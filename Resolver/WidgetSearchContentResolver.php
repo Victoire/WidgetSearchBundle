@@ -148,7 +148,6 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                     );
 
                                     foreach ($businessPagesRefs as $_businessPageRef) {
-
                                         $_businessPage = $this->pageHelper->findPageByReference($_businessPageRef, $_entity);
                                         if ($this->isPageAccessible($_businessPage, $_entity)) {
                                             if (!in_array($_businessPage->getId(), $alreadyAdded)) {
@@ -205,7 +204,6 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
         return new Query($query);
     }
 
-
     /**
      * @param      $page
      * @param null $entity
@@ -216,6 +214,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
     {
         try {
             $this->pageHelper->checkPageValidity($page, $entity);
+
             return true;
         } catch (AccessDeniedException $e) {
             return false;
