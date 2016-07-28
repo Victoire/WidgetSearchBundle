@@ -87,8 +87,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
 
                         //get fields for query
                         $fields = [];
-                        foreach ($_typeConfig->getMapping()['properties'] as $name=>$property)
-                        {
+                        foreach ($_typeConfig->getMapping()['properties'] as $name=>$property) {
                             $fields[] = $name;
                         }
 
