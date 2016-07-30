@@ -69,7 +69,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
         if (true === $parameters['emitter']) {
             $parameters['ajax'] = $parameters['receiver'];
         }
-            if (true === $parameters['receiver']) {
+        if (true === $parameters['receiver']) {
             $parameters['search'] = [
                 'business'  => [],
                 'pages'     => [],
@@ -99,7 +99,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                 ],
                             ],
                         ]);
-                        foreach ($_repo->findHybrid($query,1000) as $_result) {
+                        foreach ($_repo->findHybrid($query, 1000) as $_result) {
                             // We have a result
                             $hasResult = true;
 
@@ -141,7 +141,6 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                     );
 
                                     foreach ($businessPagesRefs as $_businessPageRef) {
-
                                         $_businessPage = $this->pageHelper->findPageByReference($_businessPageRef, $_entity);
                                         if ($this->isPageAccessible($_businessPage, $_entity)) {
                                             if (!in_array($_businessPage->getId(), $alreadyAdded)) {
@@ -203,6 +202,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
     {
         try {
             $this->pageHelper->checkPageValidity($page, $entity);
+
             return true;
         } catch (AccessDeniedException $e) {
             return false;
