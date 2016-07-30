@@ -99,7 +99,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                                 ],
                             ],
                         ]);
-                        foreach ($_repo->findHybrid($query) as $_result) {
+                        foreach ($_repo->findHybrid($query,1000) as $_result) {
                             // We have a result
                             $hasResult = true;
 
