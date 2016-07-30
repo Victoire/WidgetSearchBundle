@@ -86,10 +86,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                         $locale = $widget->getWidgetMap()->getView()->getCurrentLocale();
 
                         //get fields for query
-                        $fields = [];
-                        foreach ($_typeConfig->getMapping()['properties'] as $name => $property) {
-                            $fields[] = $name;
-                        }
+                        $fields = $this->getIndexedFields($_typeConfig->getMapping()['properties']);
 
                         if ('pages' == $_indexConfig->getName() && $locale) {
                             $query = self::getI18NQuery($this->request->get('q'), $locale);
@@ -221,5 +218,24 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
         } catch (NotFoundHttpException $e) {
             return false;
         }
+    }
+
+    /**
+     * @param $entity
+     * @param null $parent
+     * @return array
+     */
+    protected function getIndexedFields($entity,$parent = null)
+    {
+        $fields = [];
+        foreach ($entity as $name => $properties) {
+            if (isset($properties['properties'])) {
+                $fields = array_merge($fields, $this->getIndexedFields($properties['properties'], $parent.$name.'.'));
+            }else {
+                $fields[] = $parent.$name;
+            }
+        }
+
+        return $fields;
     }
 }
