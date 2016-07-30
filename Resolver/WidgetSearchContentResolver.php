@@ -223,15 +223,16 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
     /**
      * @param $entity
      * @param null $parent
+     *
      * @return array
      */
-    protected function getIndexedFields($entity,$parent = null)
+    protected function getIndexedFields($entity, $parent = null)
     {
         $fields = [];
         foreach ($entity as $name => $properties) {
             if (isset($properties['properties'])) {
                 $fields = array_merge($fields, $this->getIndexedFields($properties['properties'], $parent.$name.'.'));
-            }else {
+            } else {
                 $fields[] = $parent.$name;
             }
         }
