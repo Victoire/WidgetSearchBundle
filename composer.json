@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "victoire/victoire": "~1.5",
+        "victoire/victoire": ">=2.0.0",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/elastica-bundle": "^3.1"
     },
@@ -28,11 +28,5 @@
             "Victoire\\Widget\\SearchBundle": ""
         }
     },
-    "minimum-stability": "dev",
     "target-dir": "Victoire/Widget/SearchBundle",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.5.x-dev"
-        }
-    }
 }
