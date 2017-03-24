@@ -1,5 +1,5 @@
 {
-    "name": "friendsofvictoire/search-widget",
+    "name": "victoire/search-widget",
     "type": "symfony-bundle",
     "description": "Victoire DCMS Search widget",
     "keywords": [
