@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "victoire/victoire": ">=2.0.0",
+        "victoire/victoire": ">=2.0.0 | ~3.0",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/elastica-bundle": "^3.1"
     },
