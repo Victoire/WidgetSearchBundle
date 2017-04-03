@@ -1,13 +1,11 @@
 {
     "name": "victoire/search-widget",
     "type": "symfony-bundle",
-    "description": "Victoire DCMS Search widget",
+    "description": "Victoire Search widget",
     "keywords": [
-        "DCMS",
         "Victoire",
-        "widget",
-        "FriendsofVictoire",
-        "Search"
+        "Search",
+        "Widget"
     ],
     "license": "MIT",
     "authors": [
@@ -18,8 +16,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
-        "victoire/victoire": ">=2.0.0 | ~3.0",
+        "victoire/victoire": "~2.3 | ~3.0",
         "jms/serializer-bundle": "^1.0",
         "friendsofsymfony/elastica-bundle": "^3.1"
     },
