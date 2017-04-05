@@ -2,4 +2,18 @@ fos_elastica:
     clients:
         default: { host: localhost, port: 9200 }
     indexes:
-        app: ~
+        widgets: ~
+        pages: ~
+        business:
+            types:
+                Jedi:
+                    serializer:
+                        groups: [search]
+                    mappings:
+                        side: { type: 'string', boost: 10,  analyzer: basic_analyzer }
+                    persistence:
+                        driver: orm
+                        model:  Acme\AppBundle\Entity\Jedi
+                        provider: ~
+                        listener: ~
+                        finder: ~
