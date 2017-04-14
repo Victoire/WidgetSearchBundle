@@ -5,6 +5,7 @@ fos_elastica:
         callback_class: FOS\ElasticaBundle\Serializer\Callback
         serializer: serializer
     indexes:
+        widgets: ~
         business:
             settings:
                 index:
