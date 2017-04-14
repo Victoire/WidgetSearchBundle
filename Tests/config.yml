@@ -1,15 +1,33 @@
 fos_elastica:
     clients:
         default: { host: localhost, port: 9200 }
+    serializer:
+        callback_class: FOS\ElasticaBundle\Serializer\Callback
+        serializer: serializer
     indexes:
-        widgets: ~
-        pages: ~
         business:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            basic_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: ["asciifolding", "lowercase", "elision", "basic_filter"]
+                        filter:
+                            elision:
+                                type:     elision
+                                articles: [l, m, t, qu, n, s, j, d]
+                            basic_filter:
+                                type: edgeNGram
+                                side: front
+                                min_gram: 3
+                                max_gram: 20
             types:
                 Jedi:
-                    serializer:
-                        groups: [search]
                     mappings:
+                        name: { type: 'string', boost: 10,  analyzer: basic_analyzer }
+                        midiChlorians: { type: 'string', boost: 10,  analyzer: basic_analyzer }
                         side: { type: 'string', boost: 10,  analyzer: basic_analyzer }
                     persistence:
                         driver: orm
