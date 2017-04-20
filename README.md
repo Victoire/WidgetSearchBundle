@@ -48,6 +48,13 @@ fos_elastica:
                         finder: ~
 ```
 
+## Initialize elasticsearch mapping
+
+In order to have a relevant elasticsearch mapping, you need to run the following command before running any query:
+
+```sh
+console fos:elastica:reset
+```
 
 ## Set Up Victoire
 
