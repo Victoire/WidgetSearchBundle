@@ -2,6 +2,7 @@
 
 namespace Victoire\Widget\SearchBundle\DependencyInjection;
 
+use FOS\ElasticaBundle\DependencyInjection\FOSElasticaExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -46,46 +47,36 @@ class VictoireWidgetSearchExtension extends Extension implements PrependExtensio
             //If bundle is a widget
             if (0 === strpos($bundle->getNamespace(), 'Victoire\\Widget\\')) {
                 //find for a fos_elastica.yml config file
-                $widgetConfig = $yamlParser->parse($path.'/Resources/config/config.yml');
+                $widgetConfig = $yamlParser->parse($path . '/Resources/config/config.yml');
 
                 if (is_array($widgetConfig)) {
                     foreach ($widgetConfig['victoire_core']['widgets'] as $_widgetConfig) {
-                        if (array_key_exists('fos_elastica', $widgetConfig)) {
-                            $_config = [
-                                'indexes' => [
-                                    'widgets' => [
-                                        'types' => [
-                                            $_widgetConfig['name'] => [
-                                                'serializer'  => [
-                                                    'groups' => ['search'],
-                                                ],
-                                                'mappings'    => [],
-                                                'persistence' => [
-                                                    'driver'   => 'orm',
-                                                    'model'    => $_widgetConfig['class'],
-                                                    'provider' => [],
-                                                    'listener' => [],
-                                                    'finder'   => [],
-                                                ],
-                                            ],
-                                        ],
+                        if (!isset($widgetConfig['fos_elastica']['indexes']['widgets'])) {
+                            continue;
+                        }
+                        $_config = [
+                            'types' => [
+                                $_widgetConfig['name'] => [
+                                    'serializer' => [
+                                        'groups' => ['search'],
+                                    ],
+                                    'mappings' => [],
+                                    'persistence' => [
+                                        'driver' => 'orm',
+                                        'model' => $_widgetConfig['class'],
+                                        'provider' => [],
+                                        'listener' => [],
+                                        'finder' => [],
                                     ],
                                 ],
-                            ];
-                            $_config = array_merge_recursive($widgetConfig['fos_elastica'], $_config);
-                            $elasticaConfig = array_merge_recursive($elasticaConfig, $_config);
-                        }
+                            ],
+                        ];
+                        $_config = array_merge_recursive($widgetConfig['fos_elastica']['indexes']['widgets'], $_config);
+                        $elasticaConfig = array_merge_recursive($elasticaConfig, $_config);
                     }
                 }
             }
         }
-
-        foreach ($container->getExtensions() as $name => $extension) {
-            switch ($name) {
-                case 'fos_elastica':
-                    $container->prependExtensionConfig($name, $elasticaConfig);
-                    break;
-            }
-        }
+        $container->setParameter('victoire_search_widgets_index', $elasticaConfig);
     }
 }

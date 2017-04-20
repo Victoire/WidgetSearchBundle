@@ -5,7 +5,8 @@ fos_elastica:
         callback_class: FOS\ElasticaBundle\Serializer\Callback
         serializer: serializer
     indexes:
-        widgets: ~
+        widgets: %victoire_search_widgets_index%
+        pages: %victoire_search_pages_index%
         business:
             settings:
                 index:

@@ -22,7 +22,14 @@ fos_elastica:
         callback_class: FOS\ElasticaBundle\Serializer\Callback
         serializer: serializer
     indexes:
-        business: #business is important for now, you need to use this name otherwhise search-widget won't search here
+        # Widgets are automatically indexed by using 'victoire_search_widgets_index' parameter
+        # You can override Widgets indexation configuration
+        widgets: %victoire_search_widgets_index%
+        # Pages are automatically indexed by using 'victoire_search_pages_index' parameter
+        # You can override Pages indexation configuration
+        pages: %victoire_search_pages_index%
+        # You need to define the business entities you wish to index here
+        business:
             types:
                 Jedi:
                     serializer:
@@ -41,6 +48,13 @@ fos_elastica:
                         finder: ~
 ```
 
+## Initialize elasticsearch mapping
+
+In order to have a relevant elasticsearch mapping, you need to run the following command before running any query:
+
+```sh
+console fos:elastica:reset
+```
 
 ## Set Up Victoire
 

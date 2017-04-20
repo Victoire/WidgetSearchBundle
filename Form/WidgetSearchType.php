@@ -4,6 +4,9 @@ namespace Victoire\Widget\SearchBundle\Form;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Victoire\Widget\SearchBundle\Entity\WidgetSearch;
@@ -14,7 +17,7 @@ use Victoire\Widget\SearchBundle\Entity\WidgetSearch;
 class WidgetSearchType extends WidgetType
 {
     /**
-     * define form fields.
+     * Define form fields.
      *
      * @param FormBuilderInterface $builder
      *
@@ -24,19 +27,36 @@ class WidgetSearchType extends WidgetType
     {
         parent::buildForm($builder, $options);
         //add the mode to the form
-        $builder->add('emitter', null, [
-            'label' => 'victoire.widget_search.form.emitter.label',
-            'attr'  => [
-                'data-refreshOnChange' => 'true',
-            ],
-        ])->add('receiver', null, [
+        $builder->add('resultsPage', null, [
+            'label'       => 'victoire.widget_search.form.resultsPage.label',
+            'empty_value' => true,
+        ])->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $form = $event->getForm();
+            self::manageEmitterReceiver($form);
+        });
+    }
+
+    /**
+     * Manage emitter and receiver fields.
+     *
+     * @param FormInterface $form
+     */
+    protected function manageEmitterReceiver($form)
+    {
+        $form->add('receiver', null, [
             'label' => 'victoire.widget_search.form.receiver.label',
             'attr'  => [
                 'data-refreshOnChange' => 'true',
+                'data-target'          => 'form[name="'.$form->getRoot()->getName().'"]',
+                'data-update-strategy' => 'replaceWith',
             ],
-        ])->add('resultsPage', null, [
-            'label'       => 'victoire.widget_search.form.resultsPage.label',
-            'empty_value' => true,
+        ])->add('emitter', null, [
+            'label' => 'victoire.widget_search.form.emitter.label',
+            'attr'  => [
+                'data-refreshOnChange' => 'true',
+                'data-target'          => 'form[name="'.$form->getRoot()->getName().'"]',
+                'data-update-strategy' => 'replaceWith',
+            ],
         ]);
     }
 

@@ -11,9 +11,9 @@ Feature: Manage a Search widget
         When I select "Search" from the "1" select of "main_content" slot
         Then I should see "Widget (Search)"
         And I should see "1" quantum
-        When I check the "_a_static_widget_search[emitter]" checkbox
+        When I select "#2 Homepage" from "_a_static_widget_search[resultsPage]"
+        And I check the "_a_static_widget_search[emitter]" checkbox
         And I check the "_a_static_widget_search[receiver]" checkbox
-        And I select "#2 Homepage" from "_a_static_widget_search[resultsPage]"
         And I submit the widget
         Then I should see the success message for Widget edit
         When I reload the page

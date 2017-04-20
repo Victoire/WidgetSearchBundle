@@ -177,11 +177,16 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
      */
     protected function getI18NQuery($term, $locale)
     {
-        $filters = new \Elastica\Filter\BoolFilter();
-        $filters->addMust(
-            new \Elastica\Filter\Term(['locale' => $locale])
+        $boolFilter = new \Elastica\Filter\BoolFilter();
+        $boolFilter->addMust(
+            new \Elastica\Filter\Term(['translations.locale' => $locale])
         );
-        $filteredQuery = new \Elastica\Query\Filtered(new QueryString($term), $filters);
+
+        $nestedFilter = new \Elastica\Filter\Nested();
+        $nestedFilter->setPath('translations');
+        $nestedFilter->setFilter($boolFilter);
+
+        $filteredQuery = new \Elastica\Query\Filtered(new QueryString($term), $nestedFilter);
 
         return new Query($filteredQuery);
     }
