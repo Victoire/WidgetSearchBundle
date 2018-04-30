@@ -112,7 +112,7 @@ class WidgetSearchContentResolver extends BaseWidgetContentResolver
                             $_result = $_result->getResult();
 
                             if ($_result->getScore() > 0.4) {
-                                if ($_entity instanceof Widget) {
+                                if ($_entity instanceof Widget && null !== $_entity->getWidgetMap()) {
                                     $view = $_entity->getWidgetMap()->getView();
                                     if ($this->isPageAccessible($view)) {
                                         if (!in_array($view->getId(), $alreadyAdded) && !$view instanceof Template) {
