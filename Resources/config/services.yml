@@ -2,12 +2,12 @@ services:
     victoire_core.widget_search_content_resolver:
         class: Victoire\Widget\SearchBundle\Resolver\WidgetSearchContentResolver
         arguments:
-            - @request_stack
-            - @fos_elastica.manager.orm
-            - @fos_elastica.config_manager
-            - @doctrine.orm.entity_manager
-            - @victoire_view_reference.repository
-            - @victoire_page.page_helper
+            - "@request_stack"
+            - "@fos_elastica.manager.orm"
+            - "@fos_elastica.config_manager"
+            - "@doctrine.orm.entity_manager"
+            - "@victoire_view_reference.repository"
+            - "@victoire_page.page_helper"
         tags:
             - { name: victoire_widget.widget_content_resolver, alias: Search }
 
