@@ -40,20 +40,21 @@ class VictoireWidgetSearchExtension extends Extension implements PrependExtensio
         // Build fos_elastica config for each widget
         $elasticaConfig = [];
         $kernel = new \AppKernel('prod', false);
-        $yamlParser = new Yaml();
+        /* @var Bundle $bundle */
         foreach ($kernel->registerBundles() as $bundle) {
-            /* @var Bundle $bundle */
-            $path = $bundle->getPath();
             //If bundle is a widget
             if (0 === strpos($bundle->getNamespace(), 'Victoire\\Widget\\')) {
-                //find for a fos_elastica.yml config file
-                $widgetConfig = $yamlParser->parse($path . '/Resources/config/config.yml');
+                //search for a config file
+                $widgetConfig = Yaml::parseFile(
+                    sprintf('%s/Resources/config/config.yml', $bundle->getPath())
+                );
 
                 if (is_array($widgetConfig)) {
                     foreach ($widgetConfig['victoire_core']['widgets'] as $_widgetConfig) {
                         if (!isset($widgetConfig['fos_elastica']['indexes']['widgets'])) {
                             continue;
                         }
+
                         $_config = [
                             'types' => [
                                 $_widgetConfig['name'] => [
@@ -71,6 +72,7 @@ class VictoireWidgetSearchExtension extends Extension implements PrependExtensio
                                 ],
                             ],
                         ];
+
                         $_config = array_merge_recursive($widgetConfig['fos_elastica']['indexes']['widgets'], $_config);
                         $elasticaConfig = array_merge_recursive($elasticaConfig, $_config);
                     }
