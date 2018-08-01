@@ -45,9 +45,9 @@ class VictoireWidgetSearchExtension extends Extension implements PrependExtensio
             //If bundle is a widget
             if (0 === strpos($bundle->getNamespace(), 'Victoire\\Widget\\')) {
                 //search for a config file
-                $widgetConfig = Yaml::parseFile(
+                $widgetConfig = Yaml::parse(file_get_contents(
                     sprintf('%s/Resources/config/config.yml', $bundle->getPath())
-                );
+                ));
 
                 if (is_array($widgetConfig)) {
                     foreach ($widgetConfig['victoire_core']['widgets'] as $_widgetConfig) {
