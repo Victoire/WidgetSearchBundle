@@ -29,7 +29,6 @@ class WidgetSearchType extends WidgetType
         //add the mode to the form
         $builder->add('resultsPage', null, [
             'label'       => 'victoire.widget_search.form.resultsPage.label',
-            'empty_value' => true,
         ])->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $form = $event->getForm();
             self::manageEmitterReceiver($form);
